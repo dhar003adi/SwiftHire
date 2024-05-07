@@ -1,37 +1,40 @@
 const User = require("../models/Auth");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const { AppError } = require("../utils/error");
+const HttpStatus = require("../utils/statusCodes");
 const SECRET = process.env.SECRET;
 
 const register = async (req, res) => {
-  try {
-    const { name, usn, password } = req.body;
+  const { name, usn, password } = req.body;
 
-    const alreadyExist = await User.findOne({ usn });
+  const alreadyExist = await User.findOne({ usn });
 
-    if (alreadyExist) {
-      return res
-        .status(400)
-        .json({ message: "Already Registered", success: true });
-    }
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
-    const newUser = await User.create({
-      name: name,
-      usn: usn,
-      password: hashedPassword,
+  if (alreadyExist) {
+    throw new AppError({
+      name: "BAD_REQUEST",
+      message: "User Already Exists",
     });
-
-    const token = jwt.sign({ id: newUser.id }, SECRET);
-
-    res
-      .status(200)
-      .json({ message: "User Registered", success: true, token: token });
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ message: "Internal Server Error" });
   }
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+
+  const newUser = await User.create({
+    name: name,
+    usn: usn,
+    password: hashedPassword,
+  });
+
+  const token = jwt.sign({ id: newUser.id }, SECRET);
+
+  res
+    .status(200)
+    .json({ message: "User Registered", success: true, token: token });
+
+  throw new AppError({
+    name: "INTERNAL_SERVER_ERROR",
+    message: "Registration unsuccessfull",
+  });
 };
 
 const login = async (req, res) => {
@@ -41,9 +44,10 @@ const login = async (req, res) => {
     const user = await User.findOne({ usn });
 
     if (!user) {
-      return res
-        .status(404)
-        .json({ message: "User does not exist Register Please" });
+      throw new AppError({
+        name: "NOT_FOUND",
+        message: "User not found",
+      });
     }
 
     const isValidPass = await bcrypt.compare(password, user.password);
@@ -55,11 +59,13 @@ const login = async (req, res) => {
     const token = jwt.sign({ id: user.id }, SECRET);
 
     res
-      .status(200)
+      .status(HttpStatus.OK)
       .json({ message: "Login Successfull", success: true, token: token });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal Server Error" });
+    res
+      .status(HttpStatus.INTERNAL_SERVER_ERROR)
+      .json({ message: "Internal Server Error" });
   }
 };
 
