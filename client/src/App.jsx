@@ -1,11 +1,21 @@
-import React from 'react'
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import ProfilePage from './components/ProfilePage';
 
-const App = () => {
+
+function App() {
   return (
-    <div className='text-4xl '>
-      hi fcndj
-    </div>
-  )
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path='/' element={<ProfilePage />}/>
+          <Route path="/profile" element={<ProfilePage />} />
+          {/* Add other routes here */}
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;
