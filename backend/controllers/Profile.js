@@ -67,4 +67,19 @@ const editProfile = async (req, res) => {
   res.status(201).json({ message: "Profile Updated Successfully", profile });
 };
 
-module.exports = { addProfile, editProfile };
+const getProfileData = async (req, res) => {
+  const userId = req.user.id;
+
+  const profile = await Profile.findOne({ userId });
+  if (!profile) {
+    throw new AppError({
+      name: "NOT_FOUND",
+      message: "Profile Not Found",
+    });
+  }
+  res
+    .status(200)
+    .json({ message: "Profile Retreived", profile, success: true });
+};
+
+module.exports = { addProfile, editProfile, getProfileData };
