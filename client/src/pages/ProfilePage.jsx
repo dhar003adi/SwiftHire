@@ -1,22 +1,15 @@
-// src/ProfilePage.js
 import React from 'react';
-import Sidebar from './Sidebar';
+import Sidebar from '../components/Sidebar';
+import ProfileCard from './Component/ProfileCard';
+
 
 const ProfilePage = () => {
   return (
     <div className="flex flex-col lg:flex-row bg-gray-50 min-h-screen text-gray-800">
-      <Sidebar />
+      <Sidebar/>
       <div className="flex-grow p-6 space-y-6">
         {/* First Card */}
-        <div className="card lg:card-side bg-white shadow-xl rounded-lg overflow-hidden">
-          <figure className="p-6 bg-gray-100">
-            <img src="https://via.placeholder.com/150" alt="Profile" className="rounded-full w-32 h-32 lg:w-48 lg:h-48" />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title text-3xl font-bold">John J.</h2>
-            <p className="text-xl text-gray-600">BCA</p>
-          </div>
-        </div>
+       <ProfileCard/>
 
         {/* Second Card */}
         <div className="card bg-white shadow-xl rounded-lg overflow-hidden">
