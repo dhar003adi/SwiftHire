@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const SECRET = process.env.SECRET;
 const authenticate = (req, res, next) => {
   const token = req.header("Authorization").replace("Bearer ", "");
 
@@ -7,7 +8,7 @@ const authenticate = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, "your_secret_key");
+    const decoded = jwt.verify(token, SECRET);
     req.user = decoded;
     next();
   } catch (error) {
@@ -15,4 +16,4 @@ const authenticate = (req, res, next) => {
   }
 };
 
-module.export = { authenticate };
+module.exports = authenticate;
