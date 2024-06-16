@@ -30,4 +30,118 @@ const adminLogin = async (req, res) => {
     .json({ message: "Admin Login Successfull", token: token, success: true });
 };
 
-module.exports = { adminLogin };
+const adminPost = async (req, res) => {
+  const {
+    companyname,
+    aboutCompany,
+    jobdescription,
+    branches,
+    ctc,
+    skillreq,
+    noOfRounds,
+  } = req.body;
+
+  if (
+    !companyname ||
+    !aboutCompany ||
+    !jobdescription ||
+    !branches ||
+    !ctc ||
+    !skillreq ||
+    !noOfRounds
+  ) {
+    throw new AppError({
+      name: "BAD_REQUEST",
+      message: "All Feilds are not mentioned",
+    });
+  }
+
+  const newPost = await Admin.create({
+    companyname,
+    aboutCompany,
+    jobdescription,
+    branches,
+    ctc,
+    skillreq,
+    noOfRounds,
+  });
+
+  res.status(200).json({
+    message: "New Job Posted By Admin Successfully",
+    newPost: newPost,
+    success: true,
+  });
+};
+
+const editPost = async (req, res) => {
+  const {
+    companyname,
+    aboutCompany,
+    jobdescription,
+    branches,
+    ctc,
+    skillreq,
+    noOfRounds,
+  } = req.body;
+  const postId = req.params.id;
+
+  const editPost = {};
+  if (companyname) {
+    editPost.companyname = companyname;
+  }
+  if (aboutCompany) {
+    editPost.aboutCompany = aboutCompany;
+  }
+  if (jobdescription) {
+    editPost.jobdescription = jobdescription;
+  }
+  if (branches) {
+    editPost.branches = branches;
+  }
+  if (ctc) {
+    editPost.ctc = ctc;
+  }
+  if (skillreq) {
+    editPost.skillreq = skillreq;
+  }
+  if (noOfRounds) {
+    editPost.noOfRounds = noOfRounds;
+  }
+
+  let post = await Admin.findOne({ postId });
+  if (!post) {
+    throw new AppError({
+      name: "NOT_FOUND",
+      message: "Job Posting Not Found",
+    });
+  }
+
+  post = await Admin.findByIdAndUpdate(
+    { id: postId },
+    { $set: editPost },
+    { new: true }
+  );
+
+  res
+    .status(201)
+    .json({ message: "Post edited Successfully", post: post, success: true });
+};
+
+const deletePost = async (req, res) => {
+  const postId = req.params.id;
+
+  const post = await Admin.findOne({ postId });
+  if (!post) {
+    throw new AppError({
+      name: "NOT_FOUND",
+      message: "Post Not Found",
+    });
+  }
+
+  const delPost = await Admin.findByIdAndDelete({ postId });
+  res
+    .status(200)
+    .json({ message: "Post deleted successfully", delPost, success: true });
+};
+
+module.exports = { adminLogin, adminPost, editPost, deletePost };
