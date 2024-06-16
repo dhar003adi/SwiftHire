@@ -12,10 +12,14 @@ const adminSchema = new Schema({
     required: true,
   },
 
+  jobdescription: {
+    type: String,
+    required: true,
+  },
+
   branches: {
     type: String,
     required: true,
-    enum: Object.values(branchEnums),
   },
 
   ctc: {

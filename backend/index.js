@@ -9,6 +9,7 @@ app.use(express.json());
 
 app.use("/auth", require("./routes/Auth"));
 app.use("/profile", require("./routes/Profile"));
+app.use("/admin", require("./routes/Admin"));
 app.use(errorHandler);
 app.listen(PORT, () => {
   console.log(`Server Started At Port ${PORT}`);
