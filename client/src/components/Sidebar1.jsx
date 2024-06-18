@@ -11,7 +11,7 @@ const Sidebar = () => {
             to="/"
             className="flex items-center space-x-2 text-white hover:text-gray-300"
           >
-            <span className="material-icons">HOME</span>
+            <span className="material-icons">Home</span>
           </Link>
         </li>
         <li>
@@ -19,7 +19,7 @@ const Sidebar = () => {
             to="/profile"
             className="flex items-center space-x-2 text-white hover:text-gray-300"
           >
-            <span className="material-icons">MY PROFILE</span>
+            <span className="material-icons">Jop posted</span>
           </Link>
         </li>
         <li>
@@ -27,7 +27,7 @@ const Sidebar = () => {
             to="/logout"
             className="flex items-center space-x-2 text-white hover:text-gray-300"
           >
-            <span className="material-icons">LOGOUT</span>
+            <span className="material-icons">View Applicants</span>
           </Link>
         </li>
       </ul>
