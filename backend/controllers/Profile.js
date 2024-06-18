@@ -1,7 +1,5 @@
-const mongoose = require("mongoose");
 const Profile = require("../models/Profile");
 const AppError = require("../utils/error");
-const { findByIdAndUpdate } = require("../models/Auth");
 
 const addProfile = async (req, res) => {
   const userId = req.user.id;
@@ -43,7 +41,7 @@ const editProfile = async (req, res) => {
     edittedUser.currentBacklogs = currentBacklogs;
   }
 
-  const profile = await Profile.findOne({ userId });
+  let profile = await Profile.findOne({ userId });
   if (!profile) {
     throw new AppError({
       name: "NOT_FOUND",
@@ -58,8 +56,8 @@ const editProfile = async (req, res) => {
     });
   }
 
-  profile = await findByIdAndUpdate(
-    userId,
+  profile = await Profile.findOneAndUpdate(
+    { userId },
     { $set: edittedUser },
     { new: true }
   );
