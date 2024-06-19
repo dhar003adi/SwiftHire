@@ -16,4 +16,8 @@ router
 router
   .route("/deletePost/:id")
   .delete(authenticate, asyncHandler(adminController.deletePost));
+
+router
+  .route("/getPost")
+  .get(authenticate, asyncHandler(adminController.getPosts));
 module.exports = router;

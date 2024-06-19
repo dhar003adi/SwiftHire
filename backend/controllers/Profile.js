@@ -3,14 +3,15 @@ const AppError = require("../utils/error");
 
 const addProfile = async (req, res) => {
   const userId = req.user.id;
-  const { usn, address, about, cgpa, currentBacklogs } = req.body;
+  const { usn, address, phonenumber, sem, cgpa, currentBacklogs } = req.body;
 
   const newUser = await Profile.create({
     userId: userId,
     usn,
     address,
+    phonenumber,
+    sem,
     cgpa,
-    about,
     currentBacklogs,
   });
 
@@ -20,7 +21,7 @@ const addProfile = async (req, res) => {
 };
 
 const editProfile = async (req, res) => {
-  const { usn, address, about, cgpa, currentBacklogs } = req.body;
+  const { usn, address, phonenumber, sem, cgpa, currentBacklogs } = req.body;
   const userId = req.user.id;
 
   const edittedUser = {};
@@ -31,8 +32,11 @@ const editProfile = async (req, res) => {
   if (address) {
     edittedUser.address = address;
   }
-  if (about) {
-    edittedUser.about = about;
+  if (phonenumber) {
+    edittedUser.phonenumber = phonenumber;
+  }
+  if (sem) {
+    edittedUser.sem = sem;
   }
   if (cgpa) {
     edittedUser.cgpa = cgpa;

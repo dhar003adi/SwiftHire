@@ -5,9 +5,9 @@ const AppError = require("../utils/error");
 const SECRET = process.env.SECRET;
 
 const register = async (req, res) => {
-  const { name, password, email } = req.body;
+  const { password, email } = req.body;
 
-  if (!name || !password || !email) {
+  if (!password || !email) {
     throw new AppError({
       name: "NOT_FOUND",
       message: "Credentials Not Found",
@@ -25,7 +25,6 @@ const register = async (req, res) => {
   const hashedPass = await bcrypt.hash(password, salt);
 
   const newUser = await User.create({
-    name,
     email,
     password: hashedPass,
   });

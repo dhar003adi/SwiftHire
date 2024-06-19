@@ -18,7 +18,12 @@ const userProfile = new Schema({
     required: true,
   },
 
-  about: {
+  phonenumber: {
+    type: String,
+    required: true,
+  },
+
+  sem: {
     type: String,
     required: true,
   },
