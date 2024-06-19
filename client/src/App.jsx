@@ -7,11 +7,15 @@ import UserDetails from "./components/UserDetails";
 import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home";
 import ViewJob from "./pages/ViewJob";
+import StudentRegistration from "./pages/Component/StudentRegistration";
+import StudentLogin from "./pages/Component/StudentLogin";
 function App() {
   return (
     <Router>
       <div className="App">
         <Routes>
+        <Route path="/student-register" element={<StudentRegistration />} />
+        <Route path="/student-login" element={<StudentLogin />} />
           <Route path="/view-job" element={<ViewJob />} />
           <Route path="/add-user" element={<UserDetails />} />
           <Route path="/" element={<LandingPage />} />
