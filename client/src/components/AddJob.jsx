@@ -1,10 +1,10 @@
 import React from "react";
-import Sidebar1 from "./Sidebar1";
+import Sidebar from "./Sidebar1";
 
 const AddJob = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex">
-      <Sidebar1 />
+      <Sidebar />
       <div className="flex flex-1 justify-center items-center px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl w-full bg-white shadow-md rounded-lg overflow-hidden">
           <div className="px-6 py-4 bg-gray-800 text-white text-center">
@@ -14,61 +14,106 @@ const AddJob = () => {
             <form>
               <div className="mb-4">
                 <label
-                  htmlFor="jobTitle"
+                  htmlFor="companyname"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Job Title <span className="text-red-600">*</span>
+                  Company Name <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
-                  id="jobTitle"
+                  id="companyname"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  placeholder="Enter Job Title"
+                  placeholder="Enter Company Name"
                   required
                 />
               </div>
               <div className="mb-4">
                 <label
-                  htmlFor="jobOverview"
+                  htmlFor="aboutcompany"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Job Overview <span className="text-red-600">*</span>
+                  About Company <span className="text-red-600">*</span>
+                </label>
+                <textarea
+                  id="aboutcompany"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  placeholder="Describe the company"
+                  rows="4"
+                  required
+                ></textarea>
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="jobdescription"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Job Description <span className="text-red-600">*</span>
+                </label>
+                <textarea
+                  id="jobdescription"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  placeholder="Describe the Job"
+                  rows="4"
+                  required
+                ></textarea>
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="branches"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Branches <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
-                  id="jobOverview"
+                  id="branches"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  placeholder="Enter Job Overview"
+                  placeholder="Enter Allowed Branches"
                   required
                 />
               </div>
               <div className="mb-4">
                 <label
-                  htmlFor="responsibilities"
+                  htmlFor="ctc"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Responsibilities <span className="text-red-600">*</span>
+                  CTC <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
-                  id="responsibilities"
+                  id="ctc"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  placeholder="Enter Responsibilities"
+                  placeholder="Enter CTC"
                   required
                 />
               </div>
               <div className="mb-4">
                 <label
-                  htmlFor="requirements"
+                  htmlFor="skillreq"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Requirements <span className="text-red-600">*</span>
+                  Skill Requirements <span className="text-red-600">*</span>
                 </label>
-                <input
-                  type="text"
-                  id="requirements"
+                <textarea
+                  id="skillreq"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   placeholder="Enter Requirements"
+                  rows="4"
+                  required
+                ></textarea>
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="noOfRounds"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Number of Rounds <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="number"
+                  id="noOfRounds"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  placeholder="Enter Number of Rounds"
                   required
                 />
               </div>
