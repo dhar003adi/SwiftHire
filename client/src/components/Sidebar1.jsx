@@ -16,10 +16,18 @@ const Sidebar = () => {
         </li>
         <li>
           <Link
-            to="/profile"
+            to="/view-job"
             className="flex items-center space-x-2 text-white hover:text-gray-300"
           >
             <span className="material-icons">Jop posted</span>
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/add-job"
+            className="flex items-center space-x-2 text-white hover:text-gray-300"
+          >
+            <span className="material-icons">Add New Job</span>
           </Link>
         </li>
         <li>

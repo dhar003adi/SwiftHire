@@ -6,12 +6,13 @@ import AddJob from "./components/AddJob";
 import UserDetails from "./components/UserDetails";
 import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home";
-
+import ViewJob from "./pages/ViewJob";
 function App() {
   return (
     <Router>
       <div className="App">
         <Routes>
+          <Route path="/view-job" element={<ViewJob />} />
           <Route path="/add-user" element={<UserDetails />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="/add-job" element={<AddJob />} />
