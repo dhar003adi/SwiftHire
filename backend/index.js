@@ -38,10 +38,7 @@ app.post("/upload", upload.single("resumeImage"), (req, res) => {
 app.use("/auth", require("./routes/Auth"));
 app.use("/profile", require("./routes/Profile"));
 app.use("/admin", require("./routes/Admin"));
-app.post("/", (req,res)=>
-{
-  res.send("HELLO!")
-})
+
 app.use(errorHandler);
 app.listen(PORT, () => {
   console.log(`Server Started At Port ${PORT}`);
