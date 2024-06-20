@@ -31,6 +31,11 @@ const adminSchema = new Schema({
     type: String,
     required: true,
   },
+
+  companylink: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Admin", adminSchema);

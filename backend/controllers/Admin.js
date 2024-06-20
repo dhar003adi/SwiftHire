@@ -31,8 +31,15 @@ const adminLogin = async (req, res) => {
 };
 
 const adminPost = async (req, res) => {
-  const { companyname, aboutCompany, jobdescription, branches, ctc, skillreq } =
-    req.body;
+  const {
+    companyname,
+    aboutCompany,
+    jobdescription,
+    branches,
+    ctc,
+    skillreq,
+    companylink,
+  } = req.body;
 
   if (
     !companyname ||
@@ -40,7 +47,8 @@ const adminPost = async (req, res) => {
     !jobdescription ||
     !branches ||
     !ctc ||
-    !skillreq
+    !skillreq ||
+    !companylink
   ) {
     throw new AppError({
       name: "BAD_REQUEST",
@@ -55,6 +63,7 @@ const adminPost = async (req, res) => {
     branches,
     ctc,
     skillreq,
+    companylink,
   });
 
   res.status(200).json({
@@ -65,8 +74,15 @@ const adminPost = async (req, res) => {
 };
 
 const editPost = async (req, res) => {
-  const { companyname, aboutCompany, jobdescription, branches, ctc, skillreq } =
-    req.body;
+  const {
+    companyname,
+    aboutCompany,
+    jobdescription,
+    branches,
+    ctc,
+    skillreq,
+    companylink,
+  } = req.body;
   // console.log(req.params.id);
   const { id } = req.params;
 
@@ -89,9 +105,12 @@ const editPost = async (req, res) => {
   if (skillreq) {
     editPost.skillreq = skillreq;
   }
-  console.log(id);
+  if (companylink) {
+    editPost.companylink = companylink;
+  }
+
   let post = await Admin.findById(id);
-  console.log("postdata---->", post);
+
   if (!post) {
     throw new AppError({
       name: "NOT_FOUND",
