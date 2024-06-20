@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import ViewJob from "./pages/ViewJob";
 import StudentRegistration from "./pages/Component/StudentRegistration";
 import StudentLogin from "./pages/Component/StudentLogin";
+import AdminLogin from "./pages/Component/AdminLogin";
 function App() {
   return (
     <Router>
@@ -16,6 +17,7 @@ function App() {
         <Routes>
         <Route path="/student-register" element={<StudentRegistration />} />
         <Route path="/student-login" element={<StudentLogin />} />
+        <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/view-job" element={<ViewJob />} />
           <Route path="/add-user" element={<UserDetails />} />
           <Route path="/" element={<LandingPage />} />
