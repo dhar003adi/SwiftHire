@@ -1,13 +1,38 @@
-import React, { useState } from 'react';
+import React,{useState,useEffect} from "react";
 
 const JobsCard = () => {
-  const [jobs, setJobs] = useState([
-    { id: 1, studentName: 'Alex, John J.', jobTitle: 'Sam Hill', companyName: 'Pharetra Sed Hendrerit Foundation' },
-  ]);
+  const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const addJob = (job) => {
-    setJobs([...jobs, job]);
-  };
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/admin/getPost", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            // "Authorization": `Bearer ${localStorage.getItem("token")}`, // Assuming you store the token in local storage
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const result = await response.json();
+        setJobs(result.posts);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchJobs();
+  }, []);
+  console.log(jobs)
+  if(loading) return <>loading...</>
 
   return (
     <div className="card bg-white shadow-xl rounded-lg overflow-hidden">
@@ -24,10 +49,10 @@ const JobsCard = () => {
         <tbody>
           {jobs.map(job => (
             <tr key={job.id}>
-              <td className="border px-4 py-2">{job.studentName}</td>
-              <td className="border px-4 py-2">{job.jobTitle}</td>
-              <td className="border px-4 py-2">{job.companyName}</td>
-              <td className="border px-4 py-2"><button className="btn btn-primary">Apply Now</button></td>
+              <td className="border px-4 py-2">{job.companyname}</td>
+              <td className="border px-4 py-2">{job.jobdescription}</td>
+              <td className="border px-4 py-2">{job.skillreq}</td>
+              <td className="border px-4 py-2"><button className="btn btn-primary"><a href={job.companylink}>Apply Now</a></button></td>
             </tr>
           ))}
         </tbody>

@@ -7,7 +7,7 @@ const Sidebar = () => {
       <div className="text-2xl font-bold mb-6">swiftHire</div>
       <ul className="space-y-4">
         <li>
-          <Link to="/" className="flex items-center space-x-2 text-white hover:text-gray-300">
+          <Link to="/Home" className="flex items-center space-x-2 text-white hover:text-gray-300">
             <span className="material-icons">HOME</span>
             
           </Link>

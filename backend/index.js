@@ -8,6 +8,12 @@ const PORT = process.env.PORT;
 connectToMongo(process.env.URL);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -32,6 +38,7 @@ app.post("/upload", upload.single("resumeImage"), (req, res) => {
 app.use("/auth", require("./routes/Auth"));
 app.use("/profile", require("./routes/Profile"));
 app.use("/admin", require("./routes/Admin"));
+
 app.use(errorHandler);
 app.listen(PORT, () => {
   console.log(`Server Started At Port ${PORT}`);

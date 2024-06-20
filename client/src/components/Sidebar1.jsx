@@ -6,14 +6,7 @@ const Sidebar = () => {
     <div className="bg-gray-800 text-white w-64 p-4 min-h-screen">
       <div className="text-2xl font-bold mb-6">swiftHire</div>
       <ul className="space-y-4">
-        <li>
-          <Link
-            to="/"
-            className="flex items-center space-x-2 text-white hover:text-gray-300"
-          >
-            <span className="material-icons">Home</span>
-          </Link>
-        </li>
+        
         <li>
           <Link
             to="/view-job"
@@ -35,7 +28,7 @@ const Sidebar = () => {
             to="/logout"
             className="flex items-center space-x-2 text-white hover:text-gray-300"
           >
-            <span className="material-icons">View Applicants</span>
+            <span className="material-icons">Log Out</span>
           </Link>
         </li>
       </ul>
