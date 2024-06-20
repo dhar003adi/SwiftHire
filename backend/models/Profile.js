@@ -8,6 +8,11 @@ const userProfile = new Schema({
     required: true,
   },
 
+  name: {
+    type: String,
+    required: true,
+  },
+
   usn: {
     type: String,
     require: true,
