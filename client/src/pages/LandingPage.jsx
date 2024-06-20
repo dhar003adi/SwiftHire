@@ -10,8 +10,8 @@ function LandingPage() {
             <Link to="/student-login">
               <button className="w-40 py-2 mb-2 bg-purple-600 text-white rounded-full text-md hover:bg-purple-700">Student</button>
             </Link>
-            <Link to="/recruiter-login">
-              <button className="w-40 py-2 bg-black text-white rounded-full text-md hover:bg-gray-800">Recruiter</button>
+            <Link to="/admin-login">
+              <button className="w-40 py-2 bg-black text-white rounded-full text-md hover:bg-gray-800">Administrator</button>
             </Link>
           </div>
           <div className="flex flex-col justify-center items-center bg-gray-900 text-white p-4 rounded-lg">
