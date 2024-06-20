@@ -104,16 +104,16 @@ const AddJob = () => {
               </div>
               <div className="mb-4">
                 <label
-                  htmlFor="noOfRounds"
+                  htmlFor="ctc"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Number of Rounds <span className="text-red-600">*</span>
+                  Registration Link <span className="text-red-600">*</span>
                 </label>
                 <input
-                  type="number"
-                  id="noOfRounds"
+                  type="text"
+                  id="ctc"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  placeholder="Enter Number of Rounds"
+                  placeholder="Registration Link"
                   required
                 />
               </div>

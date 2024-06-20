@@ -6,13 +6,13 @@ const { asyncHandler } = require("../utils/handler");
 
 router
   .route("/addProfile")
-  .post(authenticate, asyncHandler(profilecontroller.addProfile));
+  .post( asyncHandler(profilecontroller.addProfile));
 
 router
   .route("/editProfile")
-  .post(authenticate, asyncHandler(profilecontroller.editProfile));
+  .post( asyncHandler(profilecontroller.editProfile));
 
 router
-  .route("/getProfile")
-  .get(authenticate, asyncHandler(profilecontroller.getProfileData));
+  .route("/getProfile/:userId")
+  .get(asyncHandler(profilecontroller.getProfileData));
 module.exports = router;

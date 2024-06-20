@@ -3,9 +3,8 @@ const { Schema } = mongoose;
 
 const userProfile = new Schema({
   userId: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
+    type:String,
+    required:true,
   },
 
   name: {
@@ -17,28 +16,25 @@ const userProfile = new Schema({
     type: String,
     require: true,
   },
-
-  address: {
+  email: {
     type: String,
     required: true,
   },
 
-  phonenumber: {
+  phone: {
     type: String,
     required: true,
   },
-
-  sem: {
-    type: String,
-    required: true,
+  sem:{
+    type:String,
+    required:true,
   },
-
   cgpa: {
     type: String,
     required: true,
   },
 
-  currentBacklogs: {
+  backlogs: {
     type: String,
     required: true,
   },

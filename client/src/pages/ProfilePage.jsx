@@ -1,15 +1,38 @@
-import React from 'react';
+import {useState,useEffect} from 'react';
 import Sidebar from '../components/Sidebar';
 import ProfileCard from './Component/ProfileCard';
 
 
 const ProfilePage = () => {
+  const [profile,setProfile]=useState(null)
+  const userId="1";
+
+  useEffect(()=>{
+    const fetchProfile = async () => {
+      try {
+        const response = await fetch(`http://localhost:8000/profile/getProfile/${userId}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch profile data');
+        }
+        const data = await response.json();
+        setProfile(data.profile);
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+      }
+    };
+    fetchProfile()
+  },[userId])
+
+  if(!profile){
+    return <div>Loading....</div>
+  }
+  console.log(profile)
   return (
     <div className="flex flex-col lg:flex-row bg-gray-50 min-h-screen text-gray-800">
       <Sidebar/>
       <div className="flex-grow p-6 space-y-6">
         {/* First Card */}
-       <ProfileCard/>
+       <ProfileCard name={profile.name}/>
 
         {/* Second Card */}
         <div className="card bg-white shadow-xl rounded-lg overflow-hidden">
@@ -18,7 +41,7 @@ const ProfilePage = () => {
               <label className="label">
                 <span className="label-text font-bold">Email ID:</span>
               </label>
-              <p>user@user.com</p>
+              <p>{profile.email}</p>
             </div>
             <div className="form-control">
               <label className="label">
@@ -28,9 +51,9 @@ const ProfilePage = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-bold">Address:</span>
+                <span className="label-text font-bold">Semester</span>
               </label>
-              <p>gsdgssd</p>
+              <p>6</p>
             </div>
             <div className="form-control">
               <label className="label">
