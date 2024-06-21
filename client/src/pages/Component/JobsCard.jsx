@@ -40,9 +40,12 @@ const JobsCard = () => {
       <table className="min-w-full bg-white">
         <thead>
           <tr>
-            <th className="py-2">Student Name</th>
-            <th className="py-2">Job Title</th>
             <th className="py-2">Company Name</th>
+            <th className="py-2">About Company</th>
+            <th className="py-2">job description</th>
+            <th className="py-2">Branches Allowed</th>
+            <th className="py-2">CTC</th>
+            <th className="py-2">Skilled required</th>
             <th className="py-2">Actions</th>
           </tr>
         </thead>
@@ -50,7 +53,10 @@ const JobsCard = () => {
           {jobs.map(job => (
             <tr key={job.id}>
               <td className="border px-4 py-2">{job.companyname}</td>
+              <td className="border px-4 py-2">{job.aboutCompany}</td>
               <td className="border px-4 py-2">{job.jobdescription}</td>
+              <td className="border px-4 py-2">{job.branches}</td>
+              <td className="border px-4 py-2">{job.ctc}</td>
               <td className="border px-4 py-2">{job.skillreq}</td>
               <td className="border px-4 py-2"><button className="btn btn-primary"><a href={job.companylink}>Apply Now</a></button></td>
             </tr>

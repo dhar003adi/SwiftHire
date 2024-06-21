@@ -1,12 +1,18 @@
 import {useState,useEffect} from 'react';
 import Sidebar from '../components/Sidebar';
 import ProfileCard from './Component/ProfileCard';
-
-
+import { Link } from 'react-router-dom';
+//import UserDetails from '../components/UserDetails'
+//import { useHistory } from 'react-router-dom';
 const ProfilePage = () => {
   const [profile,setProfile]=useState(null)
   const userId="1";
 
+  // const history = useHistory();
+
+  // const handleButtonClick = () => {
+  //   history.push('');
+  // };
   useEffect(()=>{
     const fetchProfile = async () => {
       try {
@@ -37,6 +43,12 @@ const ProfilePage = () => {
         {/* Second Card */}
         <div className="card bg-white shadow-xl rounded-lg overflow-hidden">
           <div className="card-body space-y-4 p-6">
+          <div className="form-control">
+              <label className="label">
+                <span className="label-text font-bold">USN:</span>
+              </label>
+              <p>{profile.usn}</p>
+            </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-bold">Email ID:</span>
@@ -47,34 +59,31 @@ const ProfilePage = () => {
               <label className="label">
                 <span className="label-text font-bold">Phone Number:</span>
               </label>
-              <p>655535556</p>
+              <p>{profile.phone}</p>
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-bold">Semester</span>
               </label>
-              <p>6</p>
+              <p>{profile.sem}</p>
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-bold">Current Backlog:</span>
               </label>
-              <p>2</p>
+              <p>{profile.backlogs}</p>
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-bold">CGPA:</span>
               </label>
-              <p>8.5</p>
+              <p>{profile.cgpa}</p>
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text font-bold">About:</span>
-              </label>
-              <p>eysgsdggsd abhi</p>
-            </div>
+           
             <div className="card-actions justify-end mt-4">
+              <Link to="/add-job">
               <button className="btn btn-primary">Edit Profile</button>
+              </Link>
             </div>
           </div>
         </div>
