@@ -4,6 +4,7 @@ const AppError = require("../utils/error");
 const addProfile = async (req, res) => {
   const userId = req.user.id;
   const { name, usn, email, phone, sem, cgpa, backlogs } = req.body;
+  console.log(req.body);
 
   try {
     const newUser = await Profile.create({
@@ -16,6 +17,8 @@ const addProfile = async (req, res) => {
       cgpa,
       backlogs,
     });
+
+    console.log(newUser);
 
     res
       .status(200)

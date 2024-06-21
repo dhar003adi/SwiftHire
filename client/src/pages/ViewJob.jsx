@@ -1,7 +1,6 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import JobDispCard from "./Component/JobDispCard";
 import Sidebar from "../components/Sidebar1";
-
 
 const ViewJob = () => {
   const [jobs, setJobs] = useState([]);
@@ -15,7 +14,7 @@ const ViewJob = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            // "Authorization": `Bearer ${localStorage.getItem("token")}`, // Assuming you store the token in local storage
+            // Authorization: `Bearer ${localStorage.getItem("admintoken")}`,
           },
         });
 
@@ -34,14 +33,22 @@ const ViewJob = () => {
 
     fetchJobs();
   }, []);
-  console.log(jobs)
-  if(loading) return <>loading...</>
+  console.log(jobs);
+  if (loading) return <>loading...</>;
   return (
     <div className="min-h-screen bg-gray-100 flex">
       <Sidebar />
       <div className="flex flex-col items-center p-6 w-full">
         {jobs.map((job, index) => (
-          <JobDispCard key={index} company={job.companyname} job={job.jobdescription} aboutcompany={job.aboutCompany} branch ={job.branches} ctc={job.ctc} skillReq = {job.skillreq}   />
+          <JobDispCard
+            key={index}
+            company={job.companyname}
+            job={job.jobdescription}
+            aboutcompany={job.aboutCompany}
+            branch={job.branches}
+            ctc={job.ctc}
+            skillReq={job.skillreq}
+          />
         ))}
       </div>
     </div>

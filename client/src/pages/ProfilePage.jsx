@@ -1,49 +1,52 @@
-import {useState,useEffect} from 'react';
-import Sidebar from '../components/Sidebar';
-import ProfileCard from './Component/ProfileCard';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import Sidebar from "../components/Sidebar";
+import ProfileCard from "./Component/ProfileCard";
+import { Link } from "react-router-dom";
 //import UserDetails from '../components/UserDetails'
-//import { useHistory } from 'react-router-dom';
+
 const ProfilePage = () => {
-  const [profile,setProfile]=useState(null)
-  const userId="1";
+  const [profile, setProfile] = useState(null);
+  const token = localStorage.getItem("token");
 
-  // const history = useHistory();
-
-  // const handleButtonClick = () => {
-  //   history.push('');
-  // };
-  useEffect(()=>{
+  useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/profile/getProfile/${userId}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch profile data');
-        }
+        const response = await fetch(
+          "http://localhost:8000/profile/getProfile",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
         const data = await response.json();
+        console.log(data.profile);
         setProfile(data.profile);
       } catch (error) {
-        console.error('Error fetching profile:', error);
+        console.error("Error fetching profile:", error);
       }
     };
-    fetchProfile()
-  },[userId])
+    fetchProfile();
+  }, []);
 
-  if(!profile){
-    return <div>Loading....</div>
+  if (!profile) {
+    return <div>Loading....</div>;
   }
-  console.log(profile)
+
   return (
     <div className="flex flex-col lg:flex-row bg-gray-50 min-h-screen text-gray-800">
-      <Sidebar/>
+      <Sidebar />
       <div className="flex-grow p-6 space-y-6">
         {/* First Card */}
-       <ProfileCard name={profile.name}/>
+        <ProfileCard name={profile.name} />
 
         {/* Second Card */}
         <div className="card bg-white shadow-xl rounded-lg overflow-hidden">
           <div className="card-body space-y-4 p-6">
-          <div className="form-control">
+            <div className="form-control">
               <label className="label">
                 <span className="label-text font-bold">USN:</span>
               </label>
@@ -79,10 +82,10 @@ const ProfilePage = () => {
               </label>
               <p>{profile.cgpa}</p>
             </div>
-           
+
             <div className="card-actions justify-end mt-4">
               <Link to="/add-job">
-              <button className="btn btn-primary">Edit Profile</button>
+                <button className="btn btn-primary">Edit Profile</button>
               </Link>
             </div>
           </div>
