@@ -16,7 +16,7 @@ function LandingPage() {
           </div>
           <div className="flex flex-col justify-center items-center bg-gray-900 text-white p-4 rounded-lg">
             <h1 className="text-2xl font-bold mb-2">Welcome To swiftHire</h1>
-            <p className="text-sm text-center">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus.</p>
+            <p className="text-sm text-center">Where Placement meets opportunity</p>
           </div>
         </div>
       </div>

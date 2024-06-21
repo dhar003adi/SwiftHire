@@ -29,7 +29,7 @@ const StudentRegistration = () => {
 
       if (jsonData.success) {
         localStorage.setItem("token", jsonData.token);
-        navigate("/");
+        navigate("/add-user");
       } else {
         if (jsonData.alrex) {
           alert("User already exists. Please login.");
