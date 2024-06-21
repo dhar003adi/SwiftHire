@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const UserDetails = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     usn: "",
@@ -11,32 +13,44 @@ const UserDetails = () => {
     backlogs: "",
   });
 
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [id]: value,
-    }));
+  const handleChange = async (e) => {
+    // const { id, value } = e.target;
+    // setFormData((prevData) => ({
+    //   ...prevData,
+    //   [id]: value,
+    // }));
+
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const token = localStorage.getItem("token");
     try {
       const response = await fetch("http://localhost:8000/profile/addProfile", {
         method: "POST",
+
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(formData), 
+        body: JSON.stringify({
+          name: formData.name,
+          usn: formData.usn,
+          email: formData.email,
+          phone: formData.phone,
+          sem: formData.sem,
+          cgpa: formData.cgpa,
+          backlogs: formData.backlogs,
+        }),
       });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
 
       const result = await response.json();
       console.log(result);
+      if (result.success) {
+        alert("User eneterd");
+        navigate("/Home");
+      }
     } catch (error) {
       console.error("Error adding profile:", error);
     }
@@ -58,6 +72,7 @@ const UserDetails = () => {
                 Full Name <span className="text-red-600">*</span>
               </label>
               <input
+                name="name"
                 type="text"
                 id="name"
                 value={formData.name}
@@ -74,6 +89,7 @@ const UserDetails = () => {
                 USN <span className="text-red-600">*</span>
               </label>
               <input
+                name="usn"
                 type="text"
                 id="usn"
                 value={formData.usn}
@@ -90,6 +106,7 @@ const UserDetails = () => {
                 Email Address <span className="text-red-600">*</span>
               </label>
               <input
+                name="email"
                 type="email"
                 id="email"
                 value={formData.email}
@@ -106,6 +123,7 @@ const UserDetails = () => {
                 Phone Number <span className="text-red-600">*</span>
               </label>
               <input
+                name="phone"
                 type="tel"
                 id="phone"
                 value={formData.phone}
@@ -122,6 +140,7 @@ const UserDetails = () => {
                 Semester <span className="text-red-600">*</span>
               </label>
               <input
+                name="sem"
                 type="number"
                 id="sem"
                 step="1"
@@ -139,6 +158,7 @@ const UserDetails = () => {
                 CGPA <span className="text-red-600">*</span>
               </label>
               <input
+                name="cgpa"
                 type="number"
                 id="cgpa"
                 step="0.01"
@@ -153,9 +173,11 @@ const UserDetails = () => {
                 htmlFor="backlogs"
                 className="block text-sm font-medium text-gray-700"
               >
-                Number of Active Backlogs <span className="text-red-600">*</span>
+                Number of Active Backlogs{" "}
+                <span className="text-red-600">*</span>
               </label>
               <input
+                name="backlogs"
                 type="number"
                 id="backlogs"
                 step="1"
@@ -172,7 +194,6 @@ const UserDetails = () => {
               >
                 Submit
               </button>
-              
             </div>
           </form>
         </div>

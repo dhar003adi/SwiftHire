@@ -23,7 +23,7 @@ const StudentLogin = () => {
 
       if (jsonData.success) {
         localStorage.setItem("token", jsonData.token);
-        navigate("/");
+        navigate("/Home");
       } else {
         if (jsonData.dne) {
           alert("User does not exist hence register first");
