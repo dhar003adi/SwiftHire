@@ -172,6 +172,7 @@ const UserDetails = () => {
               >
                 Submit
               </button>
+              
             </div>
           </form>
         </div>

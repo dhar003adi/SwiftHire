@@ -41,7 +41,7 @@ const ViewJob = () => {
       <Sidebar />
       <div className="flex flex-col items-center p-6 w-full">
         {jobs.map((job, index) => (
-          <JobDispCard key={index} company={job.companyname} job={job.jobdescription}  />
+          <JobDispCard key={index} company={job.companyname} job={job.jobdescription} aboutcompany={job.aboutCompany} branch ={job.branches} ctc={job.ctc} skillReq = {job.skillreq}   />
         ))}
       </div>
     </div>
