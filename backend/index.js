@@ -2,10 +2,12 @@ const express = require("express");
 const connectToMongo = require("./Database/db");
 const errorHandler = require("./middleware/errorHandler");
 const multer = require("multer");
+const cors = require("cors");
 const app = express();
 require("dotenv").config();
 const PORT = process.env.PORT;
 connectToMongo(process.env.URL);
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(function(req, res, next) {

@@ -83,7 +83,7 @@ const editPost = async (req, res) => {
     skillreq,
     companylink,
   } = req.body;
-  // console.log(req.params.id);
+
   const { id } = req.params;
 
   const editPost = {};

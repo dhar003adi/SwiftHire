@@ -2,13 +2,24 @@ const Profile = require("../models/Profile");
 const AppError = require("../utils/error");
 
 const addProfile = async (req, res) => {
+  const userId = req.user.id;
   const { name, usn, email, phone, sem, cgpa, backlogs } = req.body;
 
-const userId=1;
   try {
-    const newUser = await Profile.create({userId, name, usn, email, phone, sem, cgpa, backlogs });
+    const newUser = await Profile.create({
+      userId: userId,
+      name,
+      usn,
+      email,
+      phone,
+      sem,
+      cgpa,
+      backlogs,
+    });
 
-    res.status(200).json({ message: "Profile Information added", success: true, newUser });
+    res
+      .status(200)
+      .json({ message: "Profile Information added", success: true, newUser });
   } catch (err) {
     res.status(500).send(err);
   }
@@ -68,17 +79,16 @@ const editProfile = async (req, res) => {
 };
 
 const getProfileData = async (req, res) => {
-  const userId = req.params.userId;
-  console.log(userId)
-
-  try {
-    const profile = await Profile.findOne({ userId });
-    if (!profile) {
-      return res.status(404).json({ message: "Profile Not Found" });
-    }
-    res.status(200).json({ message: "Profile Retrieved", profile, success: true });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  const userId = req.user.id;
+  const profile = await Profile.findOne({ userId });
+  if (!profile) {
+    throw new AppError({
+      name: "NOT_FOUND",
+      message: "Profile Not Found",
+    });
   }
+  res
+    .status(200)
+    .json({ message: "Profile Retreived", profile, success: true });
 };
 module.exports = { addProfile, editProfile, getProfileData };
