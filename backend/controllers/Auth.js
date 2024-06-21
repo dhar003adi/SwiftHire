@@ -6,7 +6,7 @@ const SECRET = process.env.SECRET;
 
 const register = async (req, res) => {
   const { password, email } = req.body;
-
+  let alrex = false;
   if (!password || !email) {
     throw new AppError({
       name: "NOT_FOUND",
@@ -16,9 +16,10 @@ const register = async (req, res) => {
 
   const alredyExist = await User.findOne({ email });
   if (alredyExist) {
-    throw new AppError({
-      name: "BAD_REQUEST",
-      message: "Student already exist",
+    return res.status(400).json({
+      message: "User already exists",
+      alrex: true,
+      success: false,
     });
   }
   const salt = await bcrypt.genSalt(10);
@@ -31,19 +32,20 @@ const register = async (req, res) => {
 
   const token = jwt.sign({ id: newUser.id }, SECRET);
 
-  res.status(200).json({ message: "New User Registered", token: token });
+  res
+    .status(200)
+    .json({ message: "New User Registered", token: token, success: true });
 };
 
 const login = async (req, res) => {
   const { email, password } = req.body;
-
+  let dne = false;
   const userExist = await User.findOne({ email });
 
   if (!userExist) {
-    throw new AppError({
-      name: "NOT_FOUND",
-      message: "User Does Not Exist Please Register",
-    });
+    return res
+      .status(404)
+      .json({ message: "User Does Not Exist", success: false, dne: true });
   }
 
   const isValidPass = await bcrypt.compare(password, userExist.password);
@@ -57,7 +59,11 @@ const login = async (req, res) => {
 
   const token = jwt.sign({ id: userExist.id }, SECRET);
 
-  res.status(200).json({ message: "Login Successfull", token: token });
+  res.status(200).json({
+    message: "Login Successfull",
+    token: token,
+    success: true,
+  });
 };
 
 module.exports = { register, login };
