@@ -29,7 +29,7 @@ const addProfile = async (req, res) => {
 };
 
 const editProfile = async (req, res) => {
-  const { name, usn, address, phonenumber, sem, cgpa, currentBacklogs } =
+  const { name, usn, email, phone, sem, cgpa,backlogs } =
     req.body;
   const userId = req.user.id;
 
@@ -41,11 +41,11 @@ const editProfile = async (req, res) => {
   if (usn) {
     edittedUser.usn = usn;
   }
-  if (address) {
-    edittedUser.address = address;
+  if (email) {
+    edittedUser.email = email;
   }
-  if (phonenumber) {
-    edittedUser.phonenumber = phonenumber;
+  if (phone) {
+    edittedUser.phone = phone;
   }
   if (sem) {
     edittedUser.sem = sem;
@@ -53,8 +53,8 @@ const editProfile = async (req, res) => {
   if (cgpa) {
     edittedUser.cgpa = cgpa;
   }
-  if (currentBacklogs) {
-    edittedUser.currentBacklogs = currentBacklogs;
+  if (backlogs) {
+    edittedUser.backlogs = backlogs;
   }
 
   let profile = await Profile.findOne({ userId });
