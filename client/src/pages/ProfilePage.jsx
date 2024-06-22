@@ -84,7 +84,7 @@ const ProfilePage = () => {
             </div>
 
             <div className="card-actions justify-end mt-4">
-              <Link to="/add-user">
+              <Link to="/UpdateUserDetails">
                 <button className="btn btn-primary">Edit Profile</button>
               </Link>
             </div>

@@ -10,6 +10,7 @@ import ViewJob from "./pages/ViewJob";
 import StudentRegistration from "./pages/Component/StudentRegistration";
 import StudentLogin from "./pages/Component/StudentLogin";
 import AdminLogin from "./pages/Component/AdminLogin";
+import UpdateUserDetails from "./components/UpdateUserDetails";
 function App() {
   return (
     <Router>
@@ -24,6 +25,7 @@ function App() {
           <Route path="/add-job" element={<AddJob />} />
           <Route path="/Home" element={<Home />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/UpdateUserDetails" element={<UpdateUserDetails/>} />
           {/* Add other routes here */}
         </Routes>
       </div>
