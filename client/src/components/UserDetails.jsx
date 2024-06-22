@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const UserDetails = () => {
@@ -12,7 +12,48 @@ const UserDetails = () => {
     cgpa: "",
     backlogs: "",
   });
+  const [profile, setProfile] = useState(null);
+  const token = localStorage.getItem("token");
 
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8000/profile/getProfile",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = await response.json();
+        console.log(data.profile);
+        setProfile(data.profile);
+        
+        // Populate formData with profile data
+        setFormData({
+          name: data.profile.name || "",
+          usn: data.profile.usn || "",
+          email: data.profile.email || "",
+          phone: data.profile.phone || "",
+          sem: data.profile.sem || "",
+          cgpa: data.profile.cgpa || "",
+          backlogs: data.profile.backlogs || "",
+        });
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      }
+    };
+    if (token) {
+      fetchProfile();
+    }
+  }, [token]);
+
+
+  console.log(profile)
   const handleChange = async (e) => {
     // const { id, value } = e.target;
     // setFormData((prevData) => ({
@@ -22,6 +63,39 @@ const UserDetails = () => {
 
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch("http://localhost:8000/profile/editProfile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          usn: formData.usn,
+          email: formData.email,
+          phone: formData.phone,
+          sem: formData.sem,
+          cgpa: formData.cgpa,
+          backlogs: formData.backlogs,
+        }),
+      });
+
+      const result = await response.json();
+      // console.log(result);
+      if (result) {
+        alert("Profile updated successfully");
+        navigate("/profile");
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,7 +137,7 @@ const UserDetails = () => {
           <h2 className="text-lg font-semibold">User Details</h2>
         </div>
         <div className="px-6 py-4">
-          <form onSubmit={handleSubmit}>
+          <form >
             <div className="mb-4">
               <label
                 htmlFor="name"
@@ -188,12 +262,26 @@ const UserDetails = () => {
               />
             </div>
             <div className="mt-6">
+              {token ? 
+              <>
               <button
                 type="submit"
+                onClick={handleUpdate}
+                className="w-full bg-gray-800 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+              >
+                Update
+              </button>
+
+              </>:
+              <>
+                <button
+                type="submit"
+                onClick={handleSubmit}
                 className="w-full bg-gray-800 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
               >
                 Submit
               </button>
+              </>}
             </div>
           </form>
         </div>
