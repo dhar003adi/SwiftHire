@@ -6,7 +6,7 @@ import CompanyLogos from "../components/CompanyLogos";
 
 function Stats() {
   return (
-    <div className="App">
+    <div className="App bg-white text-black">
       <div className="flex ">
         <Sidebar />
         <div className="flex flex-col">

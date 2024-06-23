@@ -52,13 +52,13 @@ const JobsCard = () => {
         <tbody>
           {jobs.map(job => (
             <tr key={job.id}>
-              <td className="border px-4 py-2">{job.companyname}</td>
-              <td className="border px-4 py-2">{job.aboutCompany}</td>
-              <td className="border px-4 py-2">{job.jobdescription}</td>
-              <td className="border px-4 py-2">{job.branches}</td>
-              <td className="border px-4 py-2">{job.ctc}</td>
-              <td className="border px-4 py-2">{job.skillreq}</td>
-              <td className="border px-4 py-2"><button className="btn btn-primary"><a href={job.companylink}>Apply Now</a></button></td>
+              <td className="border px-4 py-2 w-1">{job.companyname}</td>
+              <td className="border px-4 py-2 w-1">{job.aboutCompany}</td>
+              <td className="border px-4 py-2 w-1">{job.jobdescription}</td>
+              <td className="border px-4 py-2 w-1">{job.branches}</td>
+              <td className="border px-4 py-2 w-1">{job.ctc}</td>
+              <td className="border px-4 py-2 w-1">{job.skillreq}</td>
+              <td className="border px-4 py-2 w-1"><button className="btn btn-primary"><a href={job.companylink}>Apply Now</a></button></td>
             </tr>
           ))}
         </tbody>
