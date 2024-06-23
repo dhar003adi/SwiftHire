@@ -11,6 +11,7 @@ import StudentRegistration from "./pages/Component/StudentRegistration";
 import StudentLogin from "./pages/Component/StudentLogin";
 import AdminLogin from "./pages/Component/AdminLogin";
 import UpdateUserDetails from "./components/UpdateUserDetails";
+import Stats from "./pages/Stats";
 function App() {
   return (
     <Router>
@@ -26,6 +27,8 @@ function App() {
           <Route path="/Home" element={<Home />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/UpdateUserDetails" element={<UpdateUserDetails/>} />
+          <Route path="/Stats" element={<Stats/>} />
+        
           {/* Add other routes here */}
         </Routes>
       </div>

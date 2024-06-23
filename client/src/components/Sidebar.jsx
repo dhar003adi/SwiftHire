@@ -19,6 +19,12 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
+          <Link to="/Stats" className="flex items-center space-x-2 text-white hover:text-gray-300">
+            <span className="material-icons">PREVIOUS YEAR STATS</span>
+            
+          </Link>
+        </li>
+        <li>
           <Link to="/logout" className="flex items-center space-x-2 text-white hover:text-gray-300">
             <span className="material-icons">LOGOUT</span>
            
