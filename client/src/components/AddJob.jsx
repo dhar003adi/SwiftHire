@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar1";
 
 const AddJob = () => {
@@ -11,6 +12,15 @@ const AddJob = () => {
     skillreq: "",
     companylink: "",
   });
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("admintoken");
+    if (!token) {
+      navigate("/admin-login");
+    }
+  }, [navigate]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -42,7 +52,9 @@ const AddJob = () => {
       console.error("Error adding job post:", error);
     }
   };
-console.log(formData)
+
+  console.log(formData);
+
   return (
     <div className="min-h-screen bg-gray-100 flex">
       <Sidebar />
@@ -54,7 +66,10 @@ console.log(formData)
           <div className="px-6 py-4">
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
-                <label htmlFor="companyname" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="companyname"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Company Name <span className="text-red-600">*</span>
                 </label>
                 <input
@@ -68,7 +83,10 @@ console.log(formData)
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="aboutCompany" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="aboutCompany"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   About Company <span className="text-red-600">*</span>
                 </label>
                 <textarea
@@ -82,7 +100,10 @@ console.log(formData)
                 ></textarea>
               </div>
               <div className="mb-4">
-                <label htmlFor="jobdescription" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="jobdescription"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Job Description <span className="text-red-600">*</span>
                 </label>
                 <textarea
@@ -96,7 +117,10 @@ console.log(formData)
                 ></textarea>
               </div>
               <div className="mb-4">
-                <label htmlFor="branches" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="branches"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Branches <span className="text-red-600">*</span>
                 </label>
                 <input
@@ -110,7 +134,10 @@ console.log(formData)
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="ctc" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="ctc"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   CTC <span className="text-red-600">*</span>
                 </label>
                 <input
@@ -124,7 +151,10 @@ console.log(formData)
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="skillreq" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="skillreq"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Skill Requirements <span className="text-red-600">*</span>
                 </label>
                 <textarea
@@ -138,7 +168,10 @@ console.log(formData)
                 ></textarea>
               </div>
               <div className="mb-4">
-                <label htmlFor="companylink" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="companylink"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Registration Link <span className="text-red-600">*</span>
                 </label>
                 <input

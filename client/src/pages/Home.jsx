@@ -1,14 +1,20 @@
-import React,{useState,useEffect } from 'react';
-import ProfileCard from './Component/ProfileCard';
-import JobsCard from './Component/JobsCard';
-import Sidebar from '../components/Sidebar';
-
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import ProfileCard from "./Component/ProfileCard";
+import JobsCard from "./Component/JobsCard";
+import Sidebar from "../components/Sidebar";
 
 function Home() {
   const [profile, setProfile] = useState("");
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (!token) {
+      navigate("/student-login");
+      return;
+    }
+
     const fetchProfile = async () => {
       try {
         const response = await fetch(
@@ -29,15 +35,15 @@ function Home() {
         console.error("Error fetching profile:", error);
       }
     };
+
     fetchProfile();
-  }, []);
+  }, [token, navigate]);
+
   return (
     <div className="flex flex-col lg:flex-row bg-gray-50 min-h-screen text-gray-800">
-        <Sidebar/>
+      <Sidebar />
       <div className="flex-grow p-6 space-y-6">
-        <ProfileCard name={profile.name}/>
-       
-       
+        <ProfileCard name={profile.name} />
         <JobsCard />
       </div>
     </div>

@@ -2,11 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
+  const handleLogout = () => {
+    localStorage.removeItem("admintoken");
+    window.location.reload();
+  };
   return (
     <div className="bg-gray-800 text-white w-64 p-4 min-h-screen">
       <div className="text-2xl font-bold mb-6">swiftHire</div>
       <ul className="space-y-4">
-        
         <li>
           <Link
             to="/view-job"
@@ -24,12 +27,12 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <Link
-            to="/logout"
+          <button
             className="flex items-center space-x-2 text-white hover:text-gray-300"
+            onClick={handleLogout}
           >
             <span className="material-icons">Log Out</span>
-          </Link>
+          </button>
         </li>
       </ul>
     </div>
